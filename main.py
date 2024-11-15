@@ -1,3 +1,12 @@
+try:
+    from win32com.client import Dispatch
+    def speak(str1):
+        speak=Dispatch(('SAPI.SpVoice'))
+        speak.speak(str1)
+        pass
+except:
+    pass
+
 def chat(userinput):
     userinput=userinput.strip()
     print(f'\nyou : {userinput}\n')
@@ -9,10 +18,18 @@ def chat(userinput):
         if userinput in listss:
             temp1=data.index(lists)
             print(f'jango : {data[temp1+1].strip()}\n')
+            try:
+                speak(data[temp1+1].strip())
+            except:
+                pass
             success=True
             break
     if success is False:
         print('sorry i dont understand, if you wanna teach me about this type "!teach"')
+        try:
+            speak('sorry i dont understand, if you wanna teach me about this type "!teach"')
+        except:
+            pass
         
 
 def teach(inp,repl):
